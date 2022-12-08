@@ -1,0 +1,23 @@
+---
+title: "Data Analisis Sentimen Masyarakat Terhadap Kuliah Online"
+author: "Juan Bontor Hutapea"
+date: "2022-11-27"
+output: html_document
+---
+
+```{r}
+library(e1071) #Untuk Naive Bayes
+library(caret)
+library(syuzhet) #untuk membaca fungsi get_nrc
+```
+ANALISIS SETIMENT
+```{r}
+tweetdata <- read.csv("tweet_kuliah_online.csv", stringsAsFactors = FALSE)
+tanggapan <- as.character(tweetdata$text)
+s <- get_nrc_sentiment(tanggapan)
+
+semua_tanggapan <- cbind(tweetdata$text,s)
+par(mar = rep(3,4))
+a <- barplot(colSums(s), col=rainbow(10), ylab='count', main='Sentiment Analisis Kuliah Online')
+brplt<-a
+```
